@@ -2,6 +2,13 @@
 #include <string>
 using namespace std;
 
+class Box
+{
+    public:
+        int capacityLitres;
+        string contents;
+};
+
 class Cat
 {
     public:
@@ -10,6 +17,14 @@ class Cat
         float weigthKg;
         string furColour;
         string eyeColour;
+
+        void HopInBox(Box box)
+        {
+            if(box.capacityLitres > 5)
+                cout << "Hop!" << endl;
+            else
+                cout << "It's too small for this cat!" << endl;
+        }
 };
 
 class Person
@@ -19,13 +34,16 @@ class Person
         int ageYears;
         float moneyPln;
         int heightCm;
-};
 
-class Box
-{
-    public:
-        int capacityLitres;
-        string contents;
+        void InspectCat(Cat cat)
+        {
+            cout << "This cat has " << cat.furColour << " fur and " << cat.eyeColour << " eyes." << endl;
+        }
+
+        void InspectBox(Box box)
+        {
+            cout << "This box has volume of " << box.capacityLitres << "L and currently has " << box.contents << " inside." << endl;
+        }
 };
 
 int main()
@@ -60,5 +78,13 @@ int main()
     Box Bin;
     Bin.capacityLitres = 120;
     Bin.contents = "laundry";
+
+    Catowner.InspectCat(Sonia);
+    Catowner.InspectCat(Milka);
+    Catowner.InspectBox(Bin);
+
+    Milka.HopInBox(Lunchbox);
+    Sonia.HopInBox(Bin);
+
     return 0;
 }
