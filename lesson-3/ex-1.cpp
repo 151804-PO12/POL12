@@ -28,7 +28,8 @@ class Model
         
         string Description()
         {
-            return "This " + color + " " + model + " car has been produced by " + brand + " in " + to_string(productionYear);
+            return "This " + color + " " + model + " car has been produced by "
+            + brand + " in " + to_string(productionYear) + ".";
         }
 };
 
@@ -66,9 +67,9 @@ class Dimensions
 class Wheels
 {
     private:
-        float diameter = 0;
+        int diameter = 0;
         string manufacturer = "unknown manufacturer";
-        string tireType = "unkown type";
+        string tireType = "unknown type";
         int wear = 0;
     public:
         Wheels()
@@ -78,7 +79,7 @@ class Wheels
             this->tireType = "unkown type";
             this->wear = 0;
         }
-        Wheels(float inputDiameter, string inputManufacturer, string inputTireType)
+        Wheels(int inputDiameter, string inputManufacturer, string inputTireType)
         {
             this->diameter = inputDiameter;
             this->manufacturer = inputManufacturer;
@@ -86,6 +87,13 @@ class Wheels
             this->wear = 0;
         }
         
+        string Description()
+        {
+            return "These " + this->tireType + " tires were manufactured by "
+            + this->manufacturer + " and have a diameter of "
+            + to_string(diameter) + " cm. They've been used to drive for "
+            + to_string(wear) + " kilometers.";
+        }
         void UseWheels(int distance)
         {
             this->wear += distance;
@@ -99,7 +107,7 @@ class Wheels
 class Engine
 {
     private:
-        float cubicCapacity = 0;
+        int cubicCapacity = 0;
         string engineType = "unknown type";
         string manufacturer = "unknown manufacturer";
         int distanceSinceOilRefill = 0;
@@ -111,15 +119,20 @@ class Engine
             this->manufacturer = "unknown manufacturer";
             this->distanceSinceOilRefill = 0;
         }
-        Engine(float inputCubicCapacity, string inputEngineType, string inputManufacturer)
+        Engine(int inputCubicCapacity, string inputEngineType, string inputManufacturer)
         {
             this->cubicCapacity = inputCubicCapacity;
             this->engineType = inputEngineType;
             this->manufacturer = inputManufacturer;
+            this->distanceSinceOilRefill = 0;
         }
+        
         string Description()
         {
-            return "This " + engineType + " engine has been produced by " + manufacturer + " has a cubic capacity of " + to_string(cubicCapacity) + " litres";
+            return "This " + engineType + " engine has been produced by "
+            + manufacturer + " and has a cubic capacity of "
+            + to_string(cubicCapacity) + " litres. It has been used to drive for "
+            + to_string(distanceSinceOilRefill) + " kilometers since last oil refill.";
         }
         void UseEngine(int distance)
         {
@@ -139,6 +152,13 @@ class Car
         Wheels wheels;
         Engine engine;
     public:
+        Car()
+        {
+            this->model = Model();
+            this->dimensions = Dimensions();
+            this->wheels = Wheels();
+            this->engine = Engine();
+        }
         Car(Model inputModel, Dimensions inputDimensions, Wheels inputWheels, Engine inputEngine)
         {
             this->model = inputModel;
@@ -146,16 +166,36 @@ class Car
             this->wheels = inputWheels;
             this->engine = inputEngine;
         }
+        
         void Drive(int distance)
         {
             this->engine.UseEngine(distance);
             this->wheels.UseWheels(distance);
         }
+        void Maintain()
+        {
+            this->engine.RefillOil();
+            this->wheels.ReplaceTires();
+        }
+        string Description()
+        {
+            return "Model information: " + this->model.Description()
+            + "\nWheel information: " + this->wheels.Description()
+            + "\nEngine information: " + this->engine.Description();
+        }
 };
 
 int main()
 {
-    cout<<"Hello World";
+    Model testModel = Model("Subata", "Arcana 3", "yellow", 2019);
+    Wheels testWheels = Wheels(60, "a really cool company idk", "winter");
+    Engine testEngine = Engine(200, "V8 Diesel", "Kronstadt");
+    Dimensions testDimensions = Dimensions(343, 163, 142);
+    Car testCar = Car(testModel, testDimensions, testWheels, testEngine);
+    testCar.Drive(15);
+    cout << testCar.Description() << endl;
+    testCar.Maintain();
+    cout << testCar.Description() << endl;
 
     return 0;
 }
