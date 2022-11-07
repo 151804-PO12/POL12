@@ -11,9 +11,12 @@ class Model
         string color = "unknown color";
         int productionYear = 0;
     public:
-        string Description()
+        Model()
         {
-            return "This " + color + " " + model + " car has been produced by " + brand + " in " + to_string(productionYear);
+            this->brand = "unknown brand";
+            this->model = "unknown model";
+            this->color = "unknown color";
+            this->productionYear = 0;
         }
         Model(string inputBrand, string inputColor, string inputModel, int inputProductionYear)
         {
@@ -21,6 +24,11 @@ class Model
             this->model = inputModel;
             this->color = inputColor;
             this->productionYear = inputProductionYear;
+        }
+        
+        string Description()
+        {
+            return "This " + color + " " + model + " car has been produced by " + brand + " in " + to_string(productionYear);
         }
 };
 
@@ -31,12 +39,20 @@ class Dimensions
         float width = 0;
         float height = 0;
     public:
+        Dimensions()
+        {
+            this->length = 0;
+            this->width = 0;
+            this->height = 0;
+        }
         Dimensions(float inputLength, float inputWidth, float inputHeight)
         {
             this->length = inputLength;
             this->width = inputWidth;
             this->height = inputHeight;
         }
+        
+        
         bool AbilityToPassUnderBridge(float bridgeHeight)
         {
             return this->height < bridgeHeight;
@@ -55,12 +71,21 @@ class Wheels
         string tireType = "unkown type";
         int wear = 0;
     public:
+        Wheels()
+        {
+            this->diameter = 0;
+            this->manufacturer = "unknown manufacturer";
+            this->tireType = "unkown type";
+            this->wear = 0;
+        }
         Wheels(float inputDiameter, string inputManufacturer, string inputTireType)
         {
             this->diameter = inputDiameter;
             this->manufacturer = inputManufacturer;
             this->tireType = inputTireType;
+            this->wear = 0;
         }
+        
         void UseWheels(int distance)
         {
             this->wear += distance;
@@ -79,6 +104,13 @@ class Engine
         string manufacturer = "unknown manufacturer";
         int distanceSinceOilRefill = 0;
     public:
+        Engine()
+        {
+            this->cubicCapacity = 0;
+            this->engineType = "unknown type";
+            this->manufacturer = "unknown manufacturer";
+            this->distanceSinceOilRefill = 0;
+        }
         Engine(float inputCubicCapacity, string inputEngineType, string inputManufacturer)
         {
             this->cubicCapacity = inputCubicCapacity;
