@@ -18,9 +18,9 @@ class Car: private Vehicle {
             return Car(this->maxSpeed, this->color, this->fuel+amount);
         }
         Car Drive(int amount) {
-            cout << "Drove for " << min(this->fuel, amount) << " kilometres." << endl;
-            if(amount>this->fuel)
-            {
+            cout << "Drove for " << min(this->fuel, amount) << " kilometres, which took "
+            << (float)min(this->fuel, amount)/maxSpeed << " hours." << endl;
+            if(amount>this->fuel) {
                 cout << "Fuel ran out in the middle of the road :(" << endl;
             }
             return Car(this->maxSpeed, this->color, max(0,this->fuel-amount));
