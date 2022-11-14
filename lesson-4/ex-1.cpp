@@ -5,13 +5,19 @@ using namespace std;
 
 class Vehicle {
     public:
-        int maxSpeed;
-        string color;
+        int maxSpeed = 0;
+        string color = "unknown color";
 };
 
 class Car: private Vehicle {
     private:
-        int fuel;
+        int fuel = 0;
+        
+        Car(int inputMaxSpeed, string inputColor, int inputFuel) {
+            this->maxSpeed = inputMaxSpeed;
+            this->color = inputColor;
+            this->fuel = inputFuel;
+        }
     public:
         
         Car Refuel(int amount) {
@@ -20,15 +26,17 @@ class Car: private Vehicle {
         Car Drive(int amount) {
             cout << "Drove for " << min(this->fuel, amount) << " kilometres, which took "
             << (float)min(this->fuel, amount)/maxSpeed << " hours." << endl;
-            if(amount>this->fuel) {
+            
+            if(amount>this->fuel)
+            {
                 cout << "Fuel ran out in the middle of the road :(" << endl;
             }
             return Car(this->maxSpeed, this->color, max(0,this->fuel-amount));
         }
-        Car(int inputMaxSpeed, string inputColor, int inputFuel) {
+        Car(int inputMaxSpeed, string inputColor) {
             this->maxSpeed = inputMaxSpeed;
             this->color = inputColor;
-            this->fuel = inputFuel;
+            this->fuel = 0;
         }
         int TankCapacity() {
             return this->fuel;
@@ -48,13 +56,13 @@ class Plane: private Vehicle {
 
 int main()
 {
-    Car test = Car(4, "blue", 12);
+    Car test = Car(60, "blue");
     cout << test.TankCapacity() << endl;
-    test = test.Refuel(4);
+    test = test.Refuel(25);
     cout << test.TankCapacity() << endl;
     Car usedCar = test.Drive(12);
     cout << usedCar.TankCapacity() << endl;
-    Car desertedCar = test.Drive(25);
+    Car desertedCar = usedCar.Drive(48);
     cout << desertedCar.TankCapacity() << endl;
 
     return 0;
