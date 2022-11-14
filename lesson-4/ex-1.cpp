@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class Vehicle{
+class Vehicle {
     public:
         int maxSpeed;
         string color;
@@ -14,12 +14,10 @@ class Car: private Vehicle {
         int fuel;
     public:
         
-        Car Refuel(int amount)
-        {
+        Car Refuel(int amount) {
             return Car(this->maxSpeed, this->color, this->fuel+amount);
         }
-        Car Drive(int amount)
-        {
+        Car Drive(int amount) {
             cout << "Drove for " << min(this->fuel, amount) << " kilometres." << endl;
             if(amount>this->fuel)
             {
@@ -32,7 +30,7 @@ class Car: private Vehicle {
             this->color = inputColor;
             this->fuel = inputFuel;
         }
-        int TankCapacity(){
+        int TankCapacity() {
             return this->fuel;
         }
 };
