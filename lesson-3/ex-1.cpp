@@ -7,28 +7,28 @@ class Model
 {
     private:
         string brand = "unknown brand";
-        string model = "unknown model";   //Having a member named the same way as class it is in doesn't sound right, but I cannot come up with better naming for now.
+        string name = "unknown name";
         string color = "unknown color";
         int productionYear = 0;
     public:
         Model()
         {
             this->brand = "unknown brand";
-            this->model = "unknown model";
+            this->name = "unknown name";
             this->color = "unknown color";
             this->productionYear = 0;
         }
-        Model(string inputBrand, string inputColor, string inputModel, int inputProductionYear)
+        Model(string inputBrand, string inputColor, string inputName, int inputProductionYear)
         {
             this->brand = inputBrand;
-            this->model = inputModel;
+            this->name = inputName;
             this->color = inputColor;
             this->productionYear = inputProductionYear;
         }
         
         string Description()
         {
-            return "This " + color + " " + model + " car has been produced by "
+            return "This " + color + " " + name + " car has been produced by "
             + brand + " in " + to_string(productionYear) + ".";
         }
 };
