@@ -7,26 +7,27 @@ class Vehicle {
     public:
         int maxSpeed = 0;
         string color = "unknown color";
+        int TankCapacity();
 };
 
 class Car: private Vehicle {
     private:
         int fuel = 0;
-        
+
         Car(int inputMaxSpeed, string inputColor, int inputFuel) {
             this->maxSpeed = inputMaxSpeed;
             this->color = inputColor;
             this->fuel = inputFuel;
         }
     public:
-        
+
         Car Refuel(int amount) {
             return Car(this->maxSpeed, this->color, this->fuel+amount);
         }
         Car Drive(int amount) {
             cout << "Drove for " << min(this->fuel, amount) << " kilometres, which took "
             << (float)min(this->fuel, amount)/maxSpeed << " hours." << endl;
-            
+
             if(amount>this->fuel)
             {
                 cout << "Fuel ran out in the middle of the road :(" << endl;
@@ -38,7 +39,7 @@ class Car: private Vehicle {
             this->color = inputColor;
             this->fuel = 0;
         }
-        int TankCapacity() {
+        TankCapacity() {
             return this->fuel;
         }
 };
@@ -51,6 +52,9 @@ class Plane: private Vehicle {
         }
         Plane Crash() {
             return Plane(0, "charred");
+        }
+        TankCapacity()  {
+            return 0;
         }
 };
 
