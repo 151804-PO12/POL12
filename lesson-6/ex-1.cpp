@@ -2,12 +2,12 @@
 
 using namespace std;
 
-class NumberUtils{
+class NumberPair{
     private:
         int a = 0;
         int b = 0;
     public:
-        NumberUtils(int a_in, int b_in)
+        NumberPair(int a_in, int b_in)
         {
             this->a = a_in;
             this->b = b_in;
@@ -22,13 +22,13 @@ class NumberUtils{
 
 int main()
 {
-    cout << NumberUtils(2,4).max() << endl
-    << NumberUtils(7,3).max() << endl
-    << NumberUtils(9,12).min() << endl
-    << NumberUtils(15,2).min() << endl
-    << NumberUtils(13,6).avg() << endl;
+    cout << NumberPair(2,4).max() << endl
+    << NumberPair(7,3).max() << endl
+    << NumberPair(9,12).min() << endl
+    << NumberPair(15,2).min() << endl
+    << NumberPair(13,6).avg() << endl;
     
-    cout << NumberUtils(NumberUtils(4,8).max(), NumberUtils(12,3).max()).max();
+    cout << NumberPair(NumberPair(4,8).max(), NumberPair(12,3).max()).max();
 
     return 0;
 }
